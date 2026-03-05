@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Couleurs du Design System - Thème Artisan */
+  --primary: #8B4513;    /* Brun Terre */
+  --secondary: #DEB887;  /* Beige Clair */
+  --accent: #A0522D;     /* Brun Moyen */
+  --background: #FFF8DC; /* Crème */
+  --surface: #FFFFFF;    /* Blanc pour les cartes */
+  --text: #362F2E;       /* Gris Sombre */
+  --border: #DEB887;     /* Beige Clair pour bordures */
+  
+  /* Typographie (Définie comme variables CSS) */
+  --font-main: Inter, system-ui, sans-serif;
+  --font-heading: Inter, system-ui, sans-serif;
+}
+
+/* Application des variables */
+@layer base {
+  body {
+    color: var(--text);
+    background: var(--background);
+    font-family: var(--font-main);
+  }
+}
