@@ -70,7 +70,10 @@ export default function Home() {
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
-              <h1 className="text-2xl font-bold text-text">Voisin Créateur</h1>
+              <div className="flex items-center gap-3">
+                <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+                <h1 className="text-2xl font-bold text-text">Voisin Créateur</h1>
+              </div>
               <div className="flex items-center space-x-4">
                 <ProfileSwitcher 
                   currentProfile={user} 
@@ -103,24 +106,24 @@ export default function Home() {
             </p>
 
             {/* === PHASE 1: TABLEAU DE BORD PAR PROFIL === */}
-            <div className="bg-white rounded-lg shadow-md p-8 max-w-5xl mx-auto border border-secondary">
+            <div className="bg-white rounded-2xl shadow-md p-8 max-w-5xl mx-auto border border-secondary">
               <h3 className="text-xl font-semibold mb-4 text-text">
                 {user.profileType === 'artisan' ? 'Votre tableau de bord artisan' : 'Votre espace client'}
               </h3>
               
               {user.profileType === 'artisan' ? (
                 <div className="space-y-4 text-left">
-                  <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
+                  <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
                     <h4 className="font-medium text-primary mb-2">🎨 Gestion de vos produits</h4>
                     <p className="text-sm text-text">Ajoutez, modifiez et supprimez vos créations</p>
                     {/* Phase 2: Lien vers gestion CRUD, statistiques produits */}
                   </div>
-                  <div className="p-4 bg-accent/10 rounded-lg border border-accent/20">
+                  <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
                     <h4 className="font-medium text-accent mb-2">📋 Suivi des commandes</h4>
                     <p className="text-sm text-text">Gérez les demandes de vos clients</p>
                     {/* Phase 2: Lien vers système de commandes, notifications */}
                   </div>
-                  <div className="p-4 bg-secondary rounded-lg">
+                  <div className="p-4 bg-secondary/50 rounded-xl">
                     <h4 className="font-medium text-dark mb-2">📊 Vos statistiques</h4>
                     <p className="text-sm text-text">Suivez vos ventes et votre popularité</p>
                     {/* Phase 2: Graphiques, analytics, revenus */}
@@ -131,12 +134,12 @@ export default function Home() {
                   {/* Intégration du Flux Visuel (Phase 2) */}
                   <ProductGrid />
                   
-                  <div className="p-4 bg-accent/10 rounded-lg border border-accent/20">
+                  <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
                     <h4 className="font-medium text-accent mb-2">🔍 Filtrer par proximité</h4>
                     <p className="text-sm text-text">Trouvez des créations près de chez vous</p>
                     {/* Phase 2: Géolocalisation, carte interactive */}
                   </div>
-                  <div className="p-4 bg-secondary rounded-lg">
+                  <div className="p-4 bg-secondary/50 rounded-xl">
                     <h4 className="font-medium text-dark mb-2">💬 Contacter les artisans</h4>
                     <p className="text-sm text-text">Posez vos questions et commandez facilement</p>
                     {/* Phase 2: Chat intégré, système de messagerie */}
@@ -156,7 +159,10 @@ export default function Home() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <h1 className="text-2xl font-bold text-text">Voisin Créateur</h1>
+            <div className="flex items-center gap-3">
+              <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+              <h1 className="text-2xl font-bold text-text">Voisin Créateur</h1>
+            </div>
             <p className="text-sm text-text">
               Les créations de vos artisans, à portée de main
             </p>

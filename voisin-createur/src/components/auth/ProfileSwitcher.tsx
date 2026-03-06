@@ -75,8 +75,15 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
 
         if (error) throw error
         if (newProfile) {
-          setProfiles(prev => [...prev.filter(p => p.profileType !== newProfileType), newProfile])
-          onProfileChange(newProfile)
+          // Mapping des données DB (snake_case) vers App (camelCase)
+          const mappedProfile = {
+            ...newProfile,
+            profileType: newProfile.profile_type,
+            postalCode: newProfile.postal_code,
+          } as UserProfile
+
+          setProfiles(prev => [...prev.filter(p => p.profileType !== newProfileType), mappedProfile])
+          onProfileChange(mappedProfile)
         }
       }
     } catch (error) {
@@ -89,7 +96,7 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
   if (!currentProfile) return null
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 border border-secondary">
+    <div className="bg-white shadow-md rounded-2xl p-4 border border-secondary">
       {/* === PHASE 1: INTERFACE DE BASCULEMENT DE PROFIL === */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
@@ -118,7 +125,7 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
             <button
               onClick={() => handleAddProfile('artisan')}
               disabled={loading}
-              className="px-3 py-1 text-xs bg-primary text-white rounded hover:bg-accent transition-colors disabled:opacity-50"
+              className="px-5 py-2.5 text-xs bg-primary text-white rounded-full hover:bg-accent transition-all hover:shadow-md hover:shadow-teal-400/30 disabled:opacity-50"
             >
               {loading ? 'Chargement...' : 'Devenir artisan'}
             </button>
@@ -128,7 +135,7 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
             <button
               onClick={() => handleAddProfile('client')}
               disabled={loading}
-              className="px-3 py-1 text-xs bg-primary text-white rounded hover:bg-accent transition-colors disabled:opacity-50"
+              className="px-5 py-2.5 text-xs bg-primary text-white rounded-full hover:bg-accent transition-all hover:shadow-md hover:shadow-teal-400/30 disabled:opacity-50"
             >
               {loading ? 'Chargement...' : 'Voir en tant que client'}
             </button>

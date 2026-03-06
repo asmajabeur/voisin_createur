@@ -1,27 +1,102 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+/* Tailwind v4 */
+@import "tailwindcss";
 
 :root {
-  /* Couleurs du Design System - Thème Artisan */
-  --primary: #8B4513;    /* Brun Terre */
-  --secondary: #DEB887;  /* Beige Clair */
-  --accent: #A0522D;     /* Brun Moyen */
-  --background: #FFF8DC; /* Crème */
-  --surface: #FFFFFF;    /* Blanc pour les cartes */
-  --text: #362F2E;       /* Gris Sombre */
-  --border: #DEB887;     /* Beige Clair pour bordures */
+  /* === PALETTE DE COULEURS (Thème Artisan Épuré) === */
+  --primary: #8B4513;     /* Marron Cuir/Terre */
+  --secondary: #F5DEB3;   /* Beige Blé */
+  --accent: #D2691E;      /* Orange Brûlé */
+  --background: #FFFAF0;  /* Blanc Floral (Crème très léger) */
+  --surface: #FFFFFF;     /* Blanc Pur */
+  --text-main: #2D3748;   /* Gris Anthracite */
+  --text-light: #718096;  /* Gris Moyen */
   
-  /* Typographie (Définie comme variables CSS) */
-  --font-main: Inter, system-ui, sans-serif;
-  --font-heading: Inter, system-ui, sans-serif;
+  /* === TYPOGRAPHIE === */
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-deco: 'Dancing Script', cursive;
 }
 
-/* Application des variables */
 @layer base {
   body {
-    color: var(--text);
-    background: var(--background);
-    font-family: var(--font-main);
+    @apply bg-[var(--background)] text-[var(--text-main)] font-sans antialiased;
+    font-family: var(--font-body);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply text-[var(--primary)];
+  }
+}
+
+/* =========================================
+   STRUCTURE DE LA PAGE (LAYOUT)
+   ========================================= */
+
+/* 1. EN-TÊTE (Header) */
+.layout-header {
+  @apply fixed top-0 left-0 right-0 z-50;
+  @apply bg-white/95 backdrop-blur-sm shadow-sm border-b border-[var(--secondary)];
+  height: 80px;
+  transition: all 0.3s ease;
+}
+
+.header-inner {
+  @apply max-w-7xl mx-auto px-4 h-full flex items-center justify-between;
+}
+
+/* 2. HERO SECTION (Photo Background + Titre) */
+.layout-hero {
+  @apply relative w-full flex flex-col items-center justify-center text-center;
+  min-height: 70vh; /* Hauteur importante pour l'impact visuel */
+  
+  /* Image de fond par défaut (Atelier artisan) */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), 
+                    url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Effet de profondeur */
+}
+
+.hero-title {
+  @apply text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg;
+  font-family: var(--font-heading);
+}
+
+.hero-subtitle {
+  @apply text-xl md:text-2xl text-gray-100 max-w-2xl px-4 drop-shadow-md;
+  font-family: var(--font-body);
+}
+
+/* 3. PIED DE PAGE (Footer) */
+.layout-footer {
+  @apply bg-[var(--primary)] text-[var(--secondary)] py-16 mt-auto;
+}
+
+.footer-inner {
+  @apply max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8;
+}
+
+/* =========================================
+   COMPOSANTS UI
+   ========================================= */
+
+/* Boutons Modernes */
+.btn-primary {
+  @apply px-8 py-3 rounded-full bg-[var(--accent)] text-white font-medium tracking-wide;
+  @apply transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-[#b85c1a];
+}
+
+.btn-secondary {
+  @apply px-8 py-3 rounded-full border-2 border-white text-white font-medium tracking-wide;
+  @apply transition-all duration-300 hover:bg-white hover:text-[var(--primary)];
+}
+
+/* Cartes Produits */
+.card-product {
+  @apply bg-[var(--surface)] rounded-2xl overflow-hidden border border-[var(--secondary)];
+  @apply transition-all duration-300 hover:shadow-xl hover:border-[var(--accent)];
 }

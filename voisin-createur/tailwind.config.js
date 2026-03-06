@@ -15,6 +15,10 @@ export default {
         text: 'var(--text)',
         border: 'var(--border)',
       },
+      fontFamily: {
+        sans: ['var(--font-main)'],
+        serif: ['var(--font-heading)'],
+      },
     },
   },
   plugins: [],

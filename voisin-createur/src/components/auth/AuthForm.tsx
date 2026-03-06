@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { ProfileType } from '../../../lib/types'
+import logo  from '../../app/logo.png'
 
 /**
  * Composant AuthForm - Phase 1: Double Profil (Artisan/Client)
@@ -98,20 +99,23 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-6 border border-secondary">
+    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-md p-6 border border-secondary">
+      <div className="flex justify-center mb-4">
+        <img src={`${logo}`} alt="Logo" className="h-16 w-auto" />
+      </div>
       <h2 className="text-2xl font-bold text-center mb-6 text-text">
         {isSignUp ? 'Créer votre compte' : 'Se connecter'}
       </h2>
 
       {/* Indicateur de type de profil */}
-      <div className="mb-6 p-3 bg-secondary rounded-lg text-center">
+      <div className="mb-6 p-3 bg-secondary/50 rounded-full text-center">
         <p className="text-sm text-text">
           Type de profil : <span className="font-semibold text-primary">{selectedProfile === 'artisan' ? 'Artisan' : 'Client'}</span>
         </p>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl">
           <p className="text-sm text-red-600">{error}</p>
         </div>
       )}
@@ -127,7 +131,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border border-secondary rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
             placeholder="Jean Dupont"
           />
         </div>
@@ -143,7 +147,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-secondary rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
             placeholder="jean@example.com"
           />
         </div>
@@ -158,7 +162,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
             id="postalCode"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
-            className="w-full px-3 py-2 border border-secondary rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
             placeholder="75001"
           />
         </div>
@@ -175,7 +179,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="w-full px-3 py-2 border border-secondary rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
             placeholder="•••••••"
           />
         </div>
@@ -184,10 +188,10 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
         <button
           type="submit"
           disabled={loading}
-          className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
+          className={`w-full py-3.5 px-6 rounded-full font-medium transition-all ${
             loading
               ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-primary hover:bg-accent text-white'
+              : 'bg-primary hover:bg-accent text-white hover:shadow-lg hover:shadow-teal-400/30'
           }`}
         >
           {loading ? (
