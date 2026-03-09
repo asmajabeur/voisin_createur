@@ -96,7 +96,7 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
   if (!currentProfile) return null
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-4 border border-secondary">
+    <div className="bg-surface shadow-md rounded-2xl p-4 border border-secondary">
       {/* === PHASE 1: INTERFACE DE BASCULEMENT DE PROFIL === */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">

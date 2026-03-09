@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { ProfileType } from '../../../lib/types'
-import logo  from '../../app/logo.png'
 
 /**
  * Composant AuthForm - Phase 1: Double Profil (Artisan/Client)
@@ -99,9 +98,9 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-md p-6 border border-secondary">
+    <div className="w-full max-w-md mx-auto bg-surface rounded-2xl shadow-md p-6 border border-secondary">
       <div className="flex justify-center mb-4">
-        <img src={`${logo}`} alt="Logo" className="h-16 w-auto" />
+        <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
       </div>
       <h2 className="text-2xl font-bold text-center mb-6 text-text">
         {isSignUp ? 'Créer votre compte' : 'Se connecter'}
@@ -109,8 +108,11 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
 
       {/* Indicateur de type de profil */}
       <div className="mb-6 p-3 bg-secondary/50 rounded-full text-center">
-        <p className="text-sm text-text">
-          Type de profil : <span className="font-semibold text-primary">{selectedProfile === 'artisan' ? 'Artisan' : 'Client'}</span>
+        <p className="text-sm text-text flex items-center justify-center gap-2">
+          Type de profil : 
+          <span className="font-bold px-2 py-0.5 rounded text-[#3a757d] bg-[#3a757d]/10">
+            {selectedProfile === 'artisan' ? 'Artisan' : 'Client'}
+          </span>
         </p>
       </div>
 
@@ -122,19 +124,21 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Champ Nom - Phase 1: Optionnel, Phase 2: Obligatoire */}
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
-            Nom complet
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-            placeholder="Jean Dupont"
-          />
-        </div>
+        {isSignUp && (
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
+              Nom complet
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+              placeholder="Jean Dupont"
+            />
+          </div>
+        )}
 
         {/* Champ Email */}
         <div>
@@ -153,19 +157,21 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
         </div>
 
         {/* Champ Code Postal - Phase 1: Optionnel, Phase 2: Obligatoire pour géolocalisation */}
-        <div>
-          <label htmlFor="postalCode" className="block text-sm font-medium text-text mb-2">
-            Code postal
-          </label>
-          <input
-            type="text"
-            id="postalCode"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-            placeholder="75001"
-          />
-        </div>
+        {isSignUp && (
+          <div>
+            <label htmlFor="postalCode" className="block text-sm font-medium text-text mb-2">
+              Code postal
+            </label>
+            <input
+              type="text"
+              id="postalCode"
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+              className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
+              placeholder="75001"
+            />
+          </div>
+        )}
 
         {/* Champ Mot de passe */}
         <div>
@@ -191,7 +197,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
           className={`w-full py-3.5 px-6 rounded-full font-medium transition-all ${
             loading
               ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-primary hover:bg-accent text-white hover:shadow-lg hover:shadow-teal-400/30'
+              : 'bg-[#3a757d] hover:bg-[#2a5a60] text-white hover:shadow-lg hover:shadow-[#3a757d]/30'
           }`}
         >
           {loading ? (

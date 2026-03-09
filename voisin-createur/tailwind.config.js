@@ -16,8 +16,8 @@ export default {
         border: 'var(--border)',
       },
       fontFamily: {
-        sans: ['var(--font-main)'],
-        serif: ['var(--font-heading)'],
+        sans: ['var(--font-main)', 'sans-serif'],
+        serif: ['var(--font-heading)', 'cursive'],
       },
     },
   },
