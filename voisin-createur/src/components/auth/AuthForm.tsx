@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { ProfileType } from '../../../lib/types'
+import InputField from './InputField'
 
 /**
  * Composant AuthForm - Phase 1: Double Profil (Artisan/Client)
@@ -72,6 +73,24 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
         })
 
         if (authError) throw authError
+
+        // FIX: Création manuelle du profil pour s'assurer qu'il existe
+        // (Au cas où le trigger SQL ne serait pas configuré)
+        if (authData.user) {
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .upsert([
+              {
+                id: authData.user.id,
+                email: cleanEmail,
+                profile_type: selectedProfile,
+                name: name || '',
+                postal_code: postalCode || '',
+              }
+            ], { onConflict: 'id' }) // Évite les doublons si le trigger a déjà couru
+          
+          if (profileError) console.error("Info: Profil déjà existant ou erreur:", profileError)
+        }
       } else {
         // === PHASE 1: CONNEXION UTILISATEUR EXISTANT ===
         // Authentification par email/mot de passe
@@ -98,7 +117,9 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
   }
 
   return (
+    // TODO REFACTOR: Extraire ces multiples styles "w-full max-w-md mx-auto bg-surface..." dans une classe `.auth-card` dans auth.css ou globals.css
     <div className="w-full max-w-md mx-auto bg-surface rounded-2xl shadow-md p-6 border border-secondary">
+      {/* TODO REFACTOR: Transformer les champs de saisie répétés (input text/email/password) en un composant UI générique `<InputField label="..." type="..." />` */}
       <div className="flex justify-center mb-4">
         <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
       </div>
@@ -125,70 +146,48 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Champ Nom - Phase 1: Optionnel, Phase 2: Obligatoire */}
         {isSignUp && (
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
-              Nom complet
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-              placeholder="Jean Dupont"
-            />
-          </div>
+          <InputField
+            id="name"
+            label="Nom complet"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Jean Dupont"
+          />
         )}
 
         {/* Champ Email */}
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-text mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-            placeholder="jean@example.com"
-          />
-        </div>
+        <InputField
+          id="email"
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required={true}
+          placeholder="jean@example.com"
+        />
 
         {/* Champ Code Postal - Phase 1: Optionnel, Phase 2: Obligatoire pour géolocalisation */}
         {isSignUp && (
-          <div>
-            <label htmlFor="postalCode" className="block text-sm font-medium text-text mb-2">
-              Code postal
-            </label>
-            <input
-              type="text"
-              id="postalCode"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-              placeholder="75001"
-            />
-          </div>
+          <InputField
+            id="postalCode"
+            label="Code postal"
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+            placeholder="75001"
+          />
         )}
 
         {/* Champ Mot de passe */}
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-text mb-2">
-            Mot de passe
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            className="w-full px-6 py-3 border border-secondary rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-text"
-            placeholder="•••••••"
-          />
-        </div>
+        <InputField
+          id="password"
+          label="Mot de passe"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required={true}
+          minLength={6}
+          placeholder="•••••••"
+        />
 
         {/* Bouton de soumission */}
         <button

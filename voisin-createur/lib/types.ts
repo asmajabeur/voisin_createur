@@ -5,10 +5,16 @@ export type ProfileType = 'artisan' | 'client'
 export interface UserProfile {
   id: string
   email: string
-  profileType: ProfileType
+  profile_type: ProfileType
   name?: string
-  postalCode?: string
-  createdAt: string
+  postal_code?: string
+  city?: string
+  phone?: string
+  description?: string
+  avatar_url?: string
+  created_at: string
+  updated_at: string
+  short_description?: string
 }
 
 export interface ProductFormData {
@@ -21,27 +27,28 @@ export interface ProductFormData {
 
 export interface Product {
   id: string
-  userId: string
+  user_id: string
   name: string
   description?: string
   price: number
-  imageUrl?: string
+  image_url?: string
   category: string
+  stock: number
   available: boolean
-  createdAt: string
+  created_at: string
   user?: {
     name?: string
-    postalCode?: string
+    postal_code?: string
   }
 }
 
 export interface Order {
   id: string
-  productId: string
-  buyerId: string
-  sellerId: string
+  product_id: string
+  buyer_id: string
+  seller_id: string
   status: 'pending' | 'confirmed' | 'completed'
-  createdAt: string
+  created_at: string
   product?: Product
   buyer?: UserProfile
   seller?: UserProfile

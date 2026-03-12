@@ -14,10 +14,12 @@ export default {
         surface: 'var(--surface)',
         text: 'var(--text)',
         border: 'var(--border)',
+        teal: 'var(--teal)',
       },
       fontFamily: {
         sans: ['var(--font-main)', 'sans-serif'],
         serif: ['var(--font-heading)', 'cursive'],
+        heading: ['var(--font-heading)', 'cursive'],
       },
     },
   },

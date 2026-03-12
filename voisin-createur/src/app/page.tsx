@@ -70,7 +70,7 @@ export default function Home() {
       <div className="min-h-screen bg-background font-sans">
         <Header user={user} signOut={signOut} />
 
-        {user.profileType === 'artisan' ? (
+        {user.profile_type === 'artisan' ? (
           <ArtisanDashboard user={user} />
         ) : (
           <ClientDashboard user={user} />

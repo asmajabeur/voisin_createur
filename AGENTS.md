@@ -47,9 +47,9 @@ Refer to these for details (load only when needed):
 - `agent_docs/testing.md`: Verification strategy and commands
 
 ## 🔄 Current State (Update This!)
-**Last Updated:** 24 janvier 2026
-**Working On:** Phase 2 Core Features - Flux Visuel (Insta-style)
-**Recently Completed:** Auth Flow validation, Double Profile switching
+**Last Updated:** 12 Mars 2026
+**Working On:** Phase 2 Core Features - Flux Visuel (Insta-style) & Amélioration CSS Artisan
+**Recently Completed:** Auth Flow validation, Double Profile switching, Correction bugs UI
 **Blocked By:** None
 
 ## 🚀 Roadmap
@@ -58,9 +58,10 @@ Refer to these for details (load only when needed):
 - [x] Setup Supabase database (Reset & Re-configured)
 - [x] Set up pre-commit hooks
 - [x] Configure environment variables
+- [x] Double profil (Artisan/Client) system
 
 ### Phase 2: Core Features
-- [x] Double profil (Artisan/Client) system
+- [x] UI Dashboard Artisan (CSS)
 - [ ] Flux visuel Instagram-style
 - [ ] CRUD catalogue produits
 - [ ] Système de commande simple
