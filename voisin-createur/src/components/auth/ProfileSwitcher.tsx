@@ -68,7 +68,7 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
             email: user.email!,
             profile_type: newProfileType,
             name: currentProfile?.name,
-            postal_code: currentProfile?.postalCode,
+            postal_code: currentProfile?.postal_code,
           })
           .select()
           .single()
@@ -78,11 +78,11 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
           // Mapping des données DB (snake_case) vers App (camelCase)
           const mappedProfile = {
             ...newProfile,
-            profileType: newProfile.profile_type,
-            postalCode: newProfile.postal_code,
+            profile_type: newProfile.profile_type,
+            postal_code: newProfile.postal_code,
           } as UserProfile
 
-          setProfiles(prev => [...prev.filter(p => p.profileType !== newProfileType), mappedProfile])
+          setProfiles(prev => [...prev.filter(p => p.profile_type !== newProfileType), mappedProfile])
           onProfileChange(mappedProfile)
         }
       }
@@ -96,32 +96,32 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
   if (!currentProfile) return null
 
   return (
-    <div className="bg-surface shadow-md rounded-2xl p-4 border border-secondary">
+    <div className="">
       {/* === PHASE 1: INTERFACE DE BASCULEMENT DE PROFIL === */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          {/* Affichage du profil actuel avec badge visuel */}
-          <div className="flex items-center space-x-2">
+
+        {/* Affichage du profil actuel avec badge visuel */}
+        {/* <div className="flex items-center space-x-2">
             <span className="text-sm font-medium text-text">Profil actuel:</span>
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              currentProfile.profileType === 'artisan' 
+              currentProfile.profile_type === 'artisan' 
                 ? 'bg-primary/20 text-primary' 
                 : 'bg-primary/10 text-primary'
             }`}>
-              {currentProfile.profileType === 'artisan' ? '🎨 Artisan' : '🛍️ Client'}
+              {currentProfile.profile_type === 'artisan' ? '🎨 Artisan' : '🛍️ Client'}
             </span>
-          </div>
-          
-          {/* Informations utilisateur - Phase 1 */}
-          <span className="text-sm text-text">
-            {currentProfile.name || currentProfile.email}
-          </span>
-          {/* Phase 2: Ajouter avatar, niveau de confiance, etc. */}
-        </div>
+          </div> */}
+
+        {/* Informations utilisateur - Phase 1 */}
+        <span className="text-sm text-text space-x-2">
+          {currentProfile.name || currentProfile.email}
+        </span>
+        {/* Phase 2: Ajouter avatar, niveau de confiance, etc. */}
+
 
         {/* Boutons de basculement - Phase 1 */}
         <div className="flex items-center space-x-2">
-          {currentProfile.profileType === 'client' && (
+          {currentProfile.profile_type === 'client' && (
             <button
               onClick={() => handleAddProfile('artisan')}
               disabled={loading}
@@ -130,8 +130,8 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
               {loading ? 'Chargement...' : 'Devenir artisan'}
             </button>
           )}
-          
-          {currentProfile.profileType === 'artisan' && (
+
+          {currentProfile.profile_type === 'artisan' && (
             <button
               onClick={() => handleAddProfile('client')}
               disabled={loading}

@@ -53,10 +53,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const profile: UserProfile = {
           id: data.id,
           email: data.email,
-          profileType: data.profile_type as ProfileType,
+          profile_type: data.profile_type as ProfileType,
           name: data.name || undefined,
-          postalCode: data.postal_code || undefined,
-          createdAt: data.created_at,
+          postal_code: data.postal_code || undefined,
+          created_at: data.created_at,
+          updated_at: data.created_at,
         }
         setUser(profile)
       }

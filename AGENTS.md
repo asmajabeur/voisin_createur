@@ -47,10 +47,10 @@ Refer to these for details (load only when needed):
 - `agent_docs/testing.md`: Verification strategy and commands
 
 ## 🔄 Current State (Update This!)
-**Last Updated:** 12 Mars 2026
-**Working On:** Phase 2 Core Features - Flux Visuel (Insta-style) & Amélioration CSS Artisan
-**Recently Completed:** Auth Flow validation, Double Profile switching, Correction bugs UI
-**Blocked By:** None
+**Last Updated:** Aujourd'hui
+**Working On:** Phase 2 Core Features - CRUD Catalogue Produits
+**Recently Completed:** Flux visuel Client (Insta-style), Recherche et Filtres Dynamiques, Rendu Grille/Flux.
+**Blocked By:** Choix de la prochaine fonctionnalité par l'utilisateur (CRUD Produits ou Commandes).
 
 ## 🚀 Roadmap
 ### Phase 1: Foundation
@@ -62,7 +62,7 @@ Refer to these for details (load only when needed):
 
 ### Phase 2: Core Features
 - [x] UI Dashboard Artisan (CSS)
-- [ ] Flux visuel Instagram-style
+- [x] Flux visuel Instagram-style
 - [ ] CRUD catalogue produits
 - [ ] Système de commande simple
 

@@ -30,7 +30,7 @@ import HeroSection from '../components/home/HeroSection'
  * - Analytics et statistiques personnelles
  */
 export default function Home() {
-  const { user, loading, signOut } = useAuth()
+  const { user, loading, signOut, refreshProfile } = useAuth()
   const [selectedProfile, setSelectedProfile] = useState<ProfileType | null>(null)
 
   /**
@@ -47,8 +47,10 @@ export default function Home() {
    * Phase 1: Simple retour à l'état initial
    * Phase 2: Sera enrichi avec welcome flow, tutorials, etc.
    */
-  const handleAuthSuccess = () => {
-    // La redirection ou la mise à jour de l'état utilisateur se fera via le hook useAuth
+  const handleAuthSuccess = async () => {
+    // Force la récupération du profil pour être sûr de bien avoir le bon `profile_type`
+    // fraîchement mis à jour lors de la connexion.
+    await refreshProfile()
   }
 
   // === PHASE 1: ÉTAT DE CHARGEMENT ===
@@ -58,7 +60,6 @@ export default function Home() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-text">Chargement...</p>
-          {/* Phase 2: Ajouter skeleton loading, messages personnalisés */}
         </div>
       </div>
     )
@@ -102,7 +103,7 @@ export default function Home() {
         {selectedProfile && (
           <div className="w-full max-w-md animate-fade-in scroll-mt-10">
             <AuthForm 
-              selectedProfile={selectedProfile} 
+              selectedProfile={selectedProfile as ProfileType} 
               onAuthSuccess={handleAuthSuccess}
             />
           </div>

@@ -1,13 +1,6 @@
 'use client'
 
-export interface Product {
-  id: string
-  name: string
-  price: number
-  image_url: string | null
-  category: string
-  user_id?: string
-}
+import { Product } from '../../../lib/types'
 
 interface ProductCardProps {
   product: Product
@@ -15,7 +8,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="group relative bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-secondary/20">
+    <div className="group relative bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border/40">
       {/* Image Carrée (Style Instagram) */}
       <div className="aspect-square w-full bg-gray-100 relative overflow-hidden">
         {product.image_url ? (
@@ -38,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Infos Produit */}
       <div className="p-3">
         <h3 className="font-medium text-text truncate">{product.name}</h3>
-        <p className="text-primary font-semibold mt-1">{product.price.toFixed(2)} €</p>
+        <p className="text-teal font-bold mt-1">{product.price.toFixed(2)} €</p>
       </div>
     </div>
   )

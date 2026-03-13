@@ -95,12 +95,22 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
         // === PHASE 1: CONNEXION UTILISATEUR EXISTANT ===
         // Authentification par email/mot de passe
         // Phase 2: Sera étendu avec OAuth (Google, Facebook, etc.)
-        const { error: signInError } = await supabase.auth.signInWithPassword({
+        const { error: signInError, data: signInData } = await supabase.auth.signInWithPassword({
           email: cleanEmail,
           password,
         })
 
         if (signInError) throw signInError
+
+        // FIX: Forcer le changement de type de profil si l'utilisateur se connecte depuis un autre onglet
+        if (signInData.user) {
+          const { error: updateError } = await supabase
+            .from('profiles')
+            .update({ profile_type: selectedProfile })
+            .eq('id', signInData.user.id)
+          
+          if (updateError) console.error("Info: Impossible de mettre à jour le rôle au login:", updateError)
+        }
       }
 
       onAuthSuccess()
