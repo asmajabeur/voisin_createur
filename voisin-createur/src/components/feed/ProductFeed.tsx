@@ -39,6 +39,8 @@ export default function ProductFeed({ posts, loading }: ProductFeedProps) {
           productName={post.name}
           price={post.price}
           description={post.description || ''}
+          shortDescription={post.short_description}
+          ingredients={post.ingredients}
           likesCount={0} // Fake likes pour l'instant
         />
       ))}

@@ -19,7 +19,9 @@ export interface UserProfile {
 
 export interface ProductFormData {
   name: string
+  short_description: string
   description: string
+  ingredients?: string
   price: number
   category: string
   image?: File
@@ -29,7 +31,9 @@ export interface Product {
   id: string
   user_id: string
   name: string
+  short_description?: string
   description?: string
+  ingredients?: string
   price: number
   image_url: string | null
   category: string

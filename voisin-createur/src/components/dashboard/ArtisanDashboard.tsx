@@ -6,14 +6,38 @@ import { useProducts } from '../../hooks/useProducts'
 import CatalogSection from './artisan/CatalogSection'
 import OrdersList from './artisan/OrdersList'
 import ChatInterface from './artisan/ChatInterface'
-import { UserProfile } from '../../../lib/types'
+import ProductForm from './artisan/ProductForm'
+import { UserProfile, Product, ProductFormData } from '../../../lib/types'
 
 interface ArtisanDashboardProps {
   user: UserProfile
 }
 
 export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
-  const { products, loadingProducts, toggleProductActive } = useProducts(user?.id)
+  const { products, loadingProducts, toggleProductActive, addProduct, updateProduct, deleteProduct } = useProducts(user?.id)
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
+
+  const handleOpenForm = (product: Product | null = null) => {
+    setEditingProduct(product)
+    setIsFormOpen(true)
+  }
+
+  const handleSubmitProduct = async (formData: ProductFormData) => {
+    let result
+    if (editingProduct) {
+      result = await updateProduct(editingProduct.id, formData)
+    } else {
+      result = await addProduct(formData)
+    }
+
+    if (result && result.success) {
+      setIsFormOpen(false)
+      setEditingProduct(null)
+    } else {
+      alert("Erreur: " + (result?.error || "Une erreur est survenue"))
+    }
+  }
 
   return (
     // TODO REFACTOR: Extraire les classes de conteneur de page globales dans globals.css (ex: `.page-layout-artisan`)
@@ -53,7 +77,10 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
                 <button className="bg-surface border border-border text-text-muted hover:bg-background px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors">
                   ✏️ Modifier mon profil
                 </button>
-                <button onClick={() => alert('Ouverture du formulaire d\'ajout...')} className="bg-teal hover:bg-teal-dark text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors">
+                <button 
+                  onClick={() => handleOpenForm()} 
+                  className="bg-teal hover:bg-teal-dark text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors"
+                >
                   ➕ Ajouter un article
                 </button>
               </div>
@@ -97,7 +124,35 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
           products={products}
           loadingProducts={loadingProducts}
           onToggleProductActive={toggleProductActive}
+          onEditProduct={handleOpenForm}
+          onDeleteProduct={deleteProduct}
         />
+
+        {/* --- MODAL FORMULAIRE PRODUIT --- */}
+        {isFormOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+            <div className="bg-background w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 md:p-10 border border-border relative">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-3xl font-heading font-bold text-text">
+                  {editingProduct ? 'Modifier votre création' : 'Ajouter une nouvelle création'}
+                </h2>
+                <button 
+                  onClick={() => setIsFormOpen(false)}
+                  className="p-2 hover:bg-surface rounded-full transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <ProductForm 
+                onSubmit={handleSubmitProduct}
+                onCancel={() => setIsFormOpen(false)}
+                initialData={editingProduct || undefined}
+                loading={loadingProducts}
+              />
+            </div>
+          </div>
+        )}
 
         {/* --- SECTION COMMANDES ET CHAT --- */}
         <div>

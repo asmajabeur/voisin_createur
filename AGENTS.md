@@ -48,9 +48,9 @@ Refer to these for details (load only when needed):
 
 ## 🔄 Current State (Update This!)
 **Last Updated:** Aujourd'hui
-**Working On:** Phase 2 Core Features - CRUD Catalogue Produits
-**Recently Completed:** Flux visuel Client (Insta-style), Recherche et Filtres Dynamiques, Rendu Grille/Flux.
-**Blocked By:** Choix de la prochaine fonctionnalité par l'utilisateur (CRUD Produits ou Commandes).
+**Working On:** Phase 2 Core Features - Système de commande simple
+**Recently Completed:** CRUD Catalogue Produits (avec descriptions, ingrédients et upload images), Flux Client mis à jour.
+**Blocked By:** Aucun.
 
 ## 🚀 Roadmap
 ### Phase 1: Foundation
@@ -63,7 +63,7 @@ Refer to these for details (load only when needed):
 ### Phase 2: Core Features
 - [x] UI Dashboard Artisan (CSS)
 - [x] Flux visuel Instagram-style
-- [ ] CRUD catalogue produits
+- [x] CRUD catalogue produits
 - [ ] Système de commande simple
 
 ### Phase 3: Polish & Launch

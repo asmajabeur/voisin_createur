@@ -10,6 +10,8 @@ interface ProductPostProps {
   productName: string
   price: number
   description: string
+  shortDescription?: string | null
+  ingredients?: string | null
   likesCount: number
 }
 
@@ -22,6 +24,8 @@ export default function ProductPost({
   productName,
   price,
   description,
+  shortDescription,
+  ingredients,
   likesCount
 }: ProductPostProps) {
   return (
@@ -90,14 +94,26 @@ export default function ProductPost({
         
         {/* Description & Prix */}
         <div className="text-sm">
-          <p className="mb-1">
-            <span className="font-semibold mr-2 text-text">{artisanName}</span>
-            <span className="text-text">{productName}</span>
-            <span className="font-bold text-teal ml-2">• {price}€</span>
+          <p className="mb-1 text-text">
+            <span className="font-semibold mr-2">{artisanName}</span>
+            <span className="font-bold text-teal">{productName}</span>
+            <span className="px-2 py-0.5 bg-secondary/20 text-teal-dark rounded-full text-[10px] font-bold ml-2 align-middle">
+              {price}€
+            </span>
           </p>
-          <p className="text-text-muted line-clamp-2 leading-relaxed">
-            {description}
+          
+          <p className="text-text mb-2 leading-relaxed">
+            {shortDescription || description}
           </p>
+
+          {ingredients && (
+            <div className="flex items-start gap-1.5 p-2 bg-surface border border-border/40 rounded-lg mb-2">
+              <span className="text-xs" title="Allergènes">🌾</span>
+              <p className="text-[11px] text-text-muted leading-tight">
+                <span className="font-semibold uppercase text-[10px]">Ingrédients:</span> {ingredients}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Bouton Voir commentaires (Fake) */}

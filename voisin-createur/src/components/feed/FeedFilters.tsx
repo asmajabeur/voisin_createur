@@ -80,6 +80,7 @@ export default function FeedFilters({
                 <option value="price_asc">Prix croissant</option>
                 <option value="price_desc">Prix décroissant</option>
                 <option value="name_asc">De A à Z</option>
+                <option value="name_desc">De Z à A</option>
               </select>
             </div>
           </div>

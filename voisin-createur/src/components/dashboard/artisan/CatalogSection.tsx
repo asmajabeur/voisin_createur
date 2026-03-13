@@ -4,9 +4,17 @@ interface CatalogSectionProps {
   products: Product[]
   loadingProducts: boolean
   onToggleProductActive: (product: Product) => void
+  onEditProduct: (product: Product) => void
+  onDeleteProduct: (productId: string) => Promise<{ success: boolean; error?: string }>
 }
 
-export default function CatalogSection({ products, loadingProducts, onToggleProductActive }: CatalogSectionProps) {
+export default function CatalogSection({ 
+  products, 
+  loadingProducts, 
+  onToggleProductActive,
+  onEditProduct,
+  onDeleteProduct
+}: CatalogSectionProps) {
   return (
     <div className="mb-16">
       <div className="flex items-center justify-center gap-4 mb-8">
@@ -21,7 +29,10 @@ export default function CatalogSection({ products, loadingProducts, onToggleProd
         ) : products.length === 0 ? (
           <div className="col-span-full text-center py-12 text-text-muted font-medium border-2 border-dashed border-border/50 rounded-xl">
             Vous n'avez pas encore d'articles dans votre catalogue.<br />
-            <button className="mt-4 bg-teal text-white py-2 px-6 rounded-lg text-sm font-semibold shadow-sm transition-colors hover:bg-teal-dark">
+            <button 
+              onClick={() => onEditProduct(null as any)}
+              className="mt-4 bg-teal text-white py-2 px-6 rounded-lg text-sm font-semibold shadow-sm transition-colors hover:bg-teal-dark"
+            >
               Ajouter un produit
             </button>
           </div>
@@ -47,26 +58,49 @@ export default function CatalogSection({ products, loadingProducts, onToggleProd
               </div>
 
               {/* Détails */}
-              <div className="bg-teal-dark p-4 flex-1 border-b border-border/20">
+              <div className="bg-teal-dark p-4 flex-1 border-b border-border/20 space-y-3">
+                {product.short_description && (
+                  <p className="text-[14px] text-white/90 italic line-clamp-2">
+                    "{product.short_description}"
+                  </p>
+                )}
+                
                 <p className="text-[15px] text-white font-medium">
-                  <span className="font-bold mr-1">Détails:</span>
+                  <span className="font-bold mr-1 block text-secondary text-xs uppercase tracking-wider mb-1">Description:</span>
                   {product.description || 'Aucune description disponible.'}
                 </p>
+
+                {product.ingredients && (
+                  <p className="text-[13px] text-white/80 bg-black/10 p-2 rounded border border-white/10">
+                    <span className="font-bold mr-1 text-secondary">Ingrédients:</span>
+                    {product.ingredients}
+                  </p>
+                )}
               </div>
 
               {/* Boutons d'action (3 en ligne) */}
               <div className="flex p-3 gap-2 bg-transparent justify-center items-center">
-                <button className="flex-1 bg-teal text-white py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center hover:bg-teal-dark">
+                <button 
+                  onClick={() => onEditProduct(product)}
+                  className="flex-1 bg-teal text-white py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center hover:bg-teal-dark"
+                >
                   Éditer
                 </button>
-                <button className="flex-1 bg-teal text-white py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center hover:bg-teal-dark">
-                  Aperçu
+                <button
+                  onClick={async () => {
+                    if (confirm("Voulez-vous vraiment retirer cette création de votre catalogue ?")) {
+                      await onDeleteProduct(product.id)
+                    }
+                  }}
+                  className="flex-1 bg-red-100 text-red-600 py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center hover:bg-red-200"
+                >
+                  Suppr.
                 </button>
                 <button
                   onClick={() => onToggleProductActive(product)}
                   className={isActive ? 'flex-[1.2] py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center bg-primary hover:bg-accent text-white' : 'flex-[1.2] py-2 px-1 rounded text-sm font-semibold shadow-sm transition-colors text-center bg-gray-400 hover:bg-gray-500 text-white'}
                 >
-                  {isActive ? 'Désactiver' : 'Activer'}
+                  {isActive ? 'Masquer' : 'Publier'}
                 </button>
               </div>
 
