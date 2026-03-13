@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Lato, Dancing_Script } from "next/font/google";
+import { Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "../hooks/useAuth";
 
-const lato = Lato({
-  weight: ["300", "400", "700"],
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-main",
+  variable: "--font-inter",
 });
 
 const dancingScript = Dancing_Script({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-heading-cursive",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${lato.variable} ${dancingScript.variable} font-sans antialiased`}
+        className={`${inter.variable} ${dancingScript.variable} font-sans antialiased`}
       >
         <AuthProvider>
           {children}

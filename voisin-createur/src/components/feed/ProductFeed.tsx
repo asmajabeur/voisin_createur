@@ -1,5 +1,5 @@
 import ProductPost from './ProductPost'
-import { FeedProduct } from '../../hooks/useFeed'
+import { FeedProduct } from '@/hooks/useFeed'
 
 interface ProductFeedProps {
   posts: FeedProduct[]

@@ -1,4 +1,4 @@
-import { UserProfile } from '../../../../lib/types'
+import { UserProfile } from '@/lib/types'
 
 interface ChatInterfaceProps {
   user: UserProfile

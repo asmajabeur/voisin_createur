@@ -1,6 +1,8 @@
 'use client'
 
-import { Product } from '../../../lib/types'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Product } from '@/lib/types'
 
 interface ProductCardProps {
   product: Product
@@ -8,14 +10,19 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="group relative bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border/40">
+    <Link 
+      href={`/product/${product.id}`} 
+      className="block group relative bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border/40 cursor-pointer"
+    >
       {/* Image Carrée (Style Instagram) */}
       <div className="aspect-square w-full bg-gray-100 relative overflow-hidden">
         {product.image_url ? (
-          <img
+          <Image
             src={product.image_url}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 50vw, 33vw"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -33,6 +40,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-medium text-text truncate">{product.name}</h3>
         <p className="text-teal font-bold mt-1">{product.price.toFixed(2)} €</p>
       </div>
-    </div>
+    </Link>
   )
 }

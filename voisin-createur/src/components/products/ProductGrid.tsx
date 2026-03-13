@@ -1,5 +1,5 @@
 import ProductCard from './ProductCard'
-import { FeedProduct } from '../../hooks/useFeed'
+import { FeedProduct } from '@/hooks/useFeed'
 
 interface ProductGridProps {
   posts: FeedProduct[]

@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '../../lib/supabase'
-import { Product, ProductFormData } from '../../lib/types'
+import { supabase } from '@/lib/supabase'
+import { Product, ProductFormData } from '@/lib/types'
+import { uploadImage } from '@/lib/cloudinary'
 
 export function useProducts(userId: string | undefined) {
   const [products, setProducts] = useState<Product[]>([])

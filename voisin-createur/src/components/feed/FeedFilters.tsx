@@ -1,6 +1,7 @@
 import { MagnifyingGlassIcon, MapPinIcon, CurrencyEuroIcon, Squares2X2Icon, ViewColumnsIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { Squares2X2Icon as Squares2X2IconSolid, ViewColumnsIcon as ViewColumnsIconSolid } from '@heroicons/react/24/solid'
-import { SortOption } from '../../hooks/useFeed'
+import { PRODUCT_CATEGORIES } from '@/lib/types'
+import { SortOption } from '@/hooks/useFeed'
 
 interface FeedFiltersProps {
   viewMode: 'grid' | 'feed'

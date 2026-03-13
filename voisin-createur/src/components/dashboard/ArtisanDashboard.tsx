@@ -7,7 +7,7 @@ import CatalogSection from './artisan/CatalogSection'
 import OrdersList from './artisan/OrdersList'
 import ChatInterface from './artisan/ChatInterface'
 import ProductForm from './artisan/ProductForm'
-import { UserProfile, Product, ProductFormData } from '../../../lib/types'
+import { UserProfile, Product, ProductFormData } from '@/lib/types'
 
 interface ArtisanDashboardProps {
   user: UserProfile

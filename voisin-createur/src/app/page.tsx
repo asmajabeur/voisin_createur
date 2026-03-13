@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { ProfileType } from '../../lib/types'
+import { UserProfile, ProfileType } from '@/lib/types'
 import ProfileSelector from '../components/auth/ProfileSelector'
 import AuthForm from '../components/auth/AuthForm'
 import Header from '../components/layout/Header'

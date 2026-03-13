@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '../../../lib/supabase'
-import { ProfileType, UserProfile } from '../../../lib/types'
+import { supabase } from '@/lib/supabase'
+import { ProfileType, UserProfile } from '@/lib/types'
 
 /**
  * Composant ProfileSwitcher - Phase 1: Double Profil (Artisan/Client)

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '../../lib/supabase'
-import { Product, UserProfile } from '../../lib/types'
+import { supabase } from '@/lib/supabase'
+import { Product, UserProfile } from '@/lib/types'
 
 // Étend le type Product pour inclure les informations du profil directement au 1er niveau
 export interface FeedProduct extends Product {

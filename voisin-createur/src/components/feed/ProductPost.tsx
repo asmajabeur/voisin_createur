@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { HeartIcon, ChatBubbleOvalLeftIcon, PaperAirplaneIcon, BookmarkIcon } from '@heroicons/react/24/outline'
 
 interface ProductPostProps {
@@ -34,11 +35,12 @@ export default function ProductPost({
       {/* Header : Artisan Info */}
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3 cursor-pointer group">
-          <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 group-hover:ring-2 group-hover:ring-[#386D71] transition-all">
-            <img 
+          <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 group-hover:ring-2 group-hover:ring-[#386D71] transition-all relative">
+            <Image 
               src={artisanAvatar} 
               alt={artisanName} 
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
           <div>
@@ -56,10 +58,12 @@ export default function ProductPost({
       {/* Image Produit */}
       <Link href={`/product/${id}`} className="block">
         <div className="aspect-square w-full bg-gray-100 relative cursor-pointer group">
-          <img 
+          <Image 
             src={imageUrl} 
             alt={productName} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {/* Overlay pour clic */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -94,13 +98,13 @@ export default function ProductPost({
         
         {/* Description & Prix */}
         <div className="text-sm">
-          <p className="mb-1 text-text">
+          <Link href={`/product/${id}`} className="block mb-1 text-text group/title">
             <span className="font-semibold mr-2">{artisanName}</span>
-            <span className="font-bold text-teal">{productName}</span>
+            <span className="font-bold text-teal group-hover/title:underline">{productName}</span>
             <span className="px-2 py-0.5 bg-secondary/20 text-teal-dark rounded-full text-[10px] font-bold ml-2 align-middle">
               {price}€
             </span>
-          </p>
+          </Link>
           
           <p className="text-text mb-2 leading-relaxed">
             {shortDescription || description}

@@ -1,6 +1,6 @@
 'use client'
 
-import { ProfileType } from '../../../lib/types'
+import { ProfileType } from '@/lib/types'
 import ProfileCard from './ProfileCard'
 
 interface ProfileSelectorProps {

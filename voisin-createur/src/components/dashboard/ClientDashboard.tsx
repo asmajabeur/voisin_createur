@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { UserProfile } from '../../../lib/types'
+import { UserProfile } from '@/lib/types'
 import HeroSection from '../home/HeroSection'
 import FeaturesSection from '../home/FeaturesSection'
 import CreatorsSection from '../home/CreatorsSection'

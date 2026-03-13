@@ -47,9 +47,9 @@ Refer to these for details (load only when needed):
 - `agent_docs/testing.md`: Verification strategy and commands
 
 ## 🔄 Current State (Update This!)
-**Last Updated:** Aujourd'hui
-**Working On:** Phase 2 Core Features - Système de commande simple
-**Recently Completed:** CRUD Catalogue Produits (avec descriptions, ingrédients et upload images), Flux Client mis à jour.
+**Last Updated:** Aujourd'hui (Juste maintenant)
+**Working On:** Phase 3 Polish & Launch (Préparation)
+**Recently Completed:** Système de commande simple, Notifications temps réel, Peaufinage UI (Typographie Inter & Notifs), Navigation.
 **Blocked By:** Aucun.
 
 ## 🚀 Roadmap
@@ -64,7 +64,7 @@ Refer to these for details (load only when needed):
 - [x] UI Dashboard Artisan (CSS)
 - [x] Flux visuel Instagram-style
 - [x] CRUD catalogue produits
-- [ ] Système de commande simple
+- [x] Système de commande simple
 
 ### Phase 3: Polish & Launch
 - [ ] Mobile responsiveness testing

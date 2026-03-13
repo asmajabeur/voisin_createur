@@ -1,4 +1,4 @@
-import { ProfileType } from '../../../lib/types'
+import { ProfileType } from '@/lib/types'
 
 interface ProfileCardProps {
   type: ProfileType

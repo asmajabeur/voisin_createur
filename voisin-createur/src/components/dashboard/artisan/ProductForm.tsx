@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { ProductFormData, PRODUCT_CATEGORIES } from '../../../../lib/types'
+import { ProductFormData, Product, PRODUCT_CATEGORIES } from '@/lib/types'
 
 interface ProductFormProps {
   onSubmit: (data: ProductFormData) => Promise<void>

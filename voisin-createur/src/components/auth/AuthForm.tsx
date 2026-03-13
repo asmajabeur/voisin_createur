@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '../../../lib/supabase'
-import { ProfileType } from '../../../lib/types'
+import { supabase } from '@/lib/supabase'
+import { ProfileType } from '@/lib/types'
 import InputField from './InputField'
 
 /**

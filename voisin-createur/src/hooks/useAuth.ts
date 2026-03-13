@@ -2,8 +2,8 @@
 
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react'
 import React from 'react'
-import { supabase } from '../../lib/supabase'
-import { UserProfile, ProfileType } from '../../lib/types'
+import { supabase } from '@/lib/supabase'
+import { UserProfile, ProfileType } from '@/lib/types'
 
 interface AuthContextType {
   user: UserProfile | null

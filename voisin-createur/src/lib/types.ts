@@ -39,6 +39,7 @@ export interface Product {
   category: string
   stock: number
   available: boolean
+  default_prep_time: number
   created_at: string
   user?: {
     name?: string
@@ -51,7 +52,11 @@ export interface Order {
   product_id: string
   buyer_id: string
   seller_id: string
-  status: 'pending' | 'confirmed' | 'completed'
+  quantity: number
+  total_price: number
+  status: 'pending' | 'confirmed' | 'ready' | 'completed' | 'cancelled'
+  estimated_ready_at?: string
+  pickup_code?: string
   created_at: string
   product?: Product
   buyer?: UserProfile

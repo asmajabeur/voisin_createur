@@ -17,8 +17,9 @@
   --color-teal-dark: #2A5255;  /* Vert Canard Sombre */
   
   /* Typographie (Définie comme variables CSS) */
-  --font-main: var(--font-main);
-  --font-heading: var(--font-heading);
+  --font-main: var(--font-inter), ui-sans-serif, system-ui;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui;
+  --font-cursive: var(--font-heading-cursive); /* Dancing Script */
 }
 
 /* Application des variables */
@@ -34,6 +35,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  .font-cursive {
+    font-family: var(--font-cursive) !important;
   }
 }
 
