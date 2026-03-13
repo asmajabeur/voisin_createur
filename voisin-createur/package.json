@@ -15,6 +15,7 @@
     "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.90.1",
+    "@heroicons/react": "^2.1.1",
     "autoprefixer": "^10.4.27",
     "cloudinary": "^2.9.0",
     "husky": "^9.1.7",
