@@ -21,7 +21,7 @@ export default function ProductFeed({ posts, loading }: ProductFeedProps) {
     return (
       <div className="text-center py-20 bg-white rounded-xl border border-gray-100 shadow-sm">
         <p className="text-gray-500 mb-2">Aucune création trouvée pour cette recherche.</p>
-        <p className="text-sm text-gray-400">Essayez d'autres mots-clés ou modifiez vos filtres.</p>
+        <p className="text-sm text-gray-400">Essayez d&apos;autres mots-clés ou modifiez vos filtres.</p>
       </div>
     )
   }

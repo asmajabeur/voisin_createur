@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ProfileType } from '@/lib/types'
 
 interface ProfileCardProps {
@@ -12,7 +13,6 @@ interface ProfileCardProps {
 }
 
 export default function ProfileCard({
-  type,
   title,
   imageSrc,
   imageAlt,
@@ -39,10 +39,11 @@ export default function ProfileCard({
 
       {/* Image Medium Centrée */}
       <div className="w-48 h-48 mb-6 relative mt-4">
-        <img
+        <Image
           src={imageSrc}
           alt={imageAlt}
-          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+          fill
+          className="object-contain transition-transform duration-500 group-hover:scale-110"
         />
       </div>
 

@@ -44,7 +44,8 @@ export interface Product {
   user?: {
     name?: string
     postal_code?: string
-  }
+  } | null
+  artisan?: UserProfile | null
 }
 
 export interface Order {

@@ -9,7 +9,7 @@ interface ProfileSelectorProps {
   loading?: boolean
 }
 
-export default function ProfileSelector({ selectedProfile, onSelectProfile, loading = false }: ProfileSelectorProps) {
+export default function ProfileSelector({ selectedProfile, onSelectProfile }: ProfileSelectorProps) {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="flex flex-col md:flex-row items-stretch justify-center relative px-4 gap-4 md:gap-0">

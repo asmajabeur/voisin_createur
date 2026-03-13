@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Product, ProductFormData } from '@/lib/types'
-import { uploadImage } from '@/lib/cloudinary'
 
 export function useProducts(userId: string | undefined) {
   const [products, setProducts] = useState<Product[]>([])
@@ -104,9 +103,10 @@ export function useProducts(userId: string | undefined) {
       if (data) setProducts([data, ...products])
       
       return { success: true, data }
-    } catch (err: any) {
-      console.error("Erreur lors de l'ajout du produit:", err)
-      return { success: false, error: err.message }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Erreur inconnue')
+      console.error("Erreur lors de l'ajout du produit:", error)
+      return { success: false, error: error.message }
     } finally {
       setLoadingProducts(false)
     }
@@ -128,9 +128,10 @@ export function useProducts(userId: string | undefined) {
         throw error
       }
       return { success: true }
-    } catch (err: any) {
-      console.error("Erreur lors de la suppression:", err)
-      return { success: false, error: err.message }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Erreur inconnue')
+      console.error("Erreur lors de la suppression:", error)
+      return { success: false, error: error.message }
     }
   }
 
@@ -160,7 +161,7 @@ export function useProducts(userId: string | undefined) {
       }
 
       // 2. Mise à jour en base
-      const updates: any = {
+      const updates: Record<string, unknown> = {
         name: formData.name,
         short_description: formData.short_description,
         description: formData.description,
@@ -185,9 +186,10 @@ export function useProducts(userId: string | undefined) {
       }
       
       return { success: true, data }
-    } catch (err: any) {
-      console.error("Erreur lors de la mise à jour du produit:", err)
-      return { success: false, error: err.message }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Erreur inconnue')
+      console.error("Erreur lors de la mise à jour du produit:", error)
+      return { success: false, error: error.message }
     } finally {
       setLoadingProducts(false)
     }

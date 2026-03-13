@@ -101,9 +101,10 @@ export function useFeed(searchQuery: string = '', maxPrice: number | '' = '', lo
 
         setFeedItems(formattedData)
         setErrorMsg(null)
-      } catch (err: any) {
-        console.error("Erreur lors de la récupération du Feed:", err)
-        setErrorMsg(err.message || JSON.stringify(err))
+      } catch (err: unknown) {
+        const error = err instanceof Error ? err : new Error('Erreur inconnue')
+        console.error("Erreur lors de la récupération du Feed:", error)
+        setErrorMsg(error.message)
       } finally {
         setLoading(false)
       }

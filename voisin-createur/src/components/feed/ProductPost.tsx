@@ -94,7 +94,7 @@ export default function ProductPost({
         </div>
         
         {/* Compteur Likes */}
-        <p className="font-semibold text-sm mb-2 text-text">{likesCount.toLocaleString()} J'aime</p>
+        <p className="font-semibold text-sm mb-2 text-text">{likesCount.toLocaleString()} J&apos;aime</p>
         
         {/* Description & Prix */}
         <div className="text-sm">

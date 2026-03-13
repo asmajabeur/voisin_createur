@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { ProfileType } from '@/lib/types'
@@ -114,12 +115,13 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
       }
 
       onAuthSuccess()
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue'
       // Gestion des erreurs spécifiques
-      if (err.message?.includes('rate limit')) {
-        setError("Trop de tentatives. Désactivez la confirmation d'email dans Supabase pour tester.")
+      if (errorMsg.includes('rate limit')) {
+        setError("Trop de tentatives. Désactivez la confirmation d&apos;email dans Supabase pour tester.")
       } else {
-        setError(err.message || 'Une erreur est survenue')
+        setError(errorMsg)
       }
     } finally {
       setLoading(false)
@@ -131,7 +133,7 @@ export default function AuthForm({ selectedProfile, onAuthSuccess }: AuthFormPro
     <div className="w-full max-w-md mx-auto bg-surface rounded-2xl shadow-md p-6 border border-secondary">
       {/* TODO REFACTOR: Transformer les champs de saisie répétés (input text/email/password) en un composant UI générique `<InputField label="..." type="..." />` */}
       <div className="flex justify-center mb-4">
-        <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+        <Image src="/logo.png" alt="Logo" width={64} height={64} className="h-16 w-auto" />
       </div>
       <h2 className="text-2xl font-bold text-center mb-6 text-text">
         {isSignUp ? 'Créer votre compte' : 'Se connecter'}

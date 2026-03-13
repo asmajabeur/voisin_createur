@@ -4,7 +4,8 @@ import React from 'react'
 import { useOrders } from '@/hooks/useOrders'
 import { useAuth } from '@/hooks/useAuth'
 import { Order } from '@/lib/types'
-import { CheckCircleIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon, ClockIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 export default function OrdersList() {
   const { user } = useAuth()
@@ -53,7 +54,7 @@ export default function OrdersList() {
                 #{order.id.slice(0, 4).toUpperCase()}
               </div>
               <div>
-                <span className="font-bold text-text block">{(order as any).buyer?.name || 'Voisin'}</span>
+                <span className="font-bold text-text block">{order.buyer?.name || 'Voisin'}</span>
                 <span className="text-[10px] text-text-muted uppercase tracking-wider">{new Date(order.created_at).toLocaleDateString()}</span>
               </div>
             </div>
@@ -75,9 +76,16 @@ export default function OrdersList() {
                     <CheckCircleIcon className="h-4 w-4" /> Détails Produit
                   </h4>
                   <div className="flex gap-3">
-                    <img src={(order as any).product?.image_url || ''} className="w-16 h-16 rounded-lg object-cover" />
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                      <Image 
+                        src={order.product?.image_url || 'https://images.unsplash.com/photo-1610708083812-3211116b08ed?q=80&w=600&auto=format&fit=crop'} 
+                        alt={order.product?.name || 'Produit'}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                     <div>
-                      <p className="font-bold text-text">{(order as any).product?.name}</p>
+                      <p className="font-bold text-text">{order.product?.name}</p>
                       <p className="text-sm text-text-muted">Quantité: {order.quantity}</p>
                       <p className="text-sm font-bold text-teal">{order.total_price}€</p>
                     </div>

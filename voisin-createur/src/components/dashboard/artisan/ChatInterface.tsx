@@ -1,4 +1,5 @@
 import { UserProfile } from '@/lib/types'
+import Image from 'next/image'
 
 interface ChatInterfaceProps {
   user: UserProfile
@@ -24,7 +25,7 @@ export default function ChatInterface({ user }: ChatInterfaceProps) {
             👩🏼
           </div>
           <div className="bg-[#E2D0C2] text-[15px] text-[#333] p-4 rounded-2xl rounded-bl-sm shadow-sm relative">
-            <p><span className="font-bold">Marie-Laure:</span> Bonjour Pierre, j'ai une question sur la boîte à bijoux.</p>
+            <p><span className="font-bold">Marie-Laure:</span> Bonjour Pierre, j&apos;ai une question sur la boîte à bijoux.</p>
             {/* Petite flèche bulle */}
             <div className="absolute bottom-0 left-[-8px] w-4 h-4 bg-[#E2D0C2]" style={{clipPath: 'polygon(100% 0, 0 100%, 100% 100%)'}}></div>
           </div>
@@ -32,8 +33,13 @@ export default function ChatInterface({ user }: ChatInterfaceProps) {
 
         {/* Message Artisan (Droite) */}
         <div className="flex items-end gap-3 self-end max-w-[85%] flex-row-reverse">
-          <div className="w-10 h-10 rounded-full bg-[#E5D5C5] flex-shrink-0 flex items-center justify-center overflow-hidden">
-            <img src={user.avatar_url || "https://images.unsplash.com/photo-1580983574971-ce488d5e08f5?q=80&w=300&auto=format&fit=crop"} alt="Artisan" className="w-full h-full object-cover" />
+          <div className="w-10 h-10 rounded-full bg-[#E5D5C5] flex-shrink-0 flex items-center justify-center overflow-hidden relative">
+            <Image 
+              src={user.avatar_url || "https://images.unsplash.com/photo-1580983574971-ce488d5e08f5?q=80&w=300&auto=format&fit=crop"} 
+              alt="Artisan" 
+              fill
+              className="object-cover" 
+            />
           </div>
           <div className="bg-teal-dark text-white text-[15px] p-4 rounded-2xl rounded-br-sm shadow-sm relative">
             <p><span className="font-bold">Pierre Bois&Co:</span> Bonjour Marie-Laure! Bien sûr, que souhaitez-vous savoir ?</p>

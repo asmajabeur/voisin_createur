@@ -1,6 +1,7 @@
 'use client'
+import Image from 'next/image'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ChartBarIcon, CreditCardIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/solid'
 import { useProducts } from '../../hooks/useProducts'
 import CatalogSection from './artisan/CatalogSection'
@@ -55,11 +56,12 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
 
           <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Avatar Image Circulaire avec bordure grise douce */}
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-[#F5F1E7] shadow-md flex-shrink-0">
-              <img
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-[#F5F1E7] shadow-md flex-shrink-0 relative">
+              <Image
                 src={user.avatar_url || "https://images.unsplash.com/photo-1580983574971-ce488d5e08f5?q=80&w=300&auto=format&fit=crop"}
                 alt="Profil de l'artisan"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
 
@@ -174,7 +176,7 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
       <div className="mt-16 bg-gradient-to-t from-primary to-accent text-white py-12 text-center relative border-t-4 border-border/20">
         <h2 className="font-heading text-3xl mb-6">Rejoignez la communauté des créateurs locaux</h2>
         <button className="bg-background text-text font-bold px-8 py-3 rounded-lg shadow-md hover:bg-surface transition-colors">
-          S'inscrire à la Newsletter &gt;
+          S&apos;inscrire à la Newsletter &gt;
         </button>
       </div>
     </div>

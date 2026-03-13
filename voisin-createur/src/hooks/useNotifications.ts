@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 
 export interface Notification {
@@ -17,7 +17,7 @@ export function useNotifications(userId: string | undefined) {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
 
-  const fetchNotifications = async () => {
+  const fetchNotifications = useCallback(async () => {
     if (!userId) return
 
     const { data, error } = await supabase
@@ -31,7 +31,7 @@ export function useNotifications(userId: string | undefined) {
       setNotifications(data)
       setUnreadCount(data.filter(n => !n.read).length)
     }
-  }
+  }, [userId])
 
   useEffect(() => {
     if (!userId) return
@@ -56,7 +56,7 @@ export function useNotifications(userId: string | undefined) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [userId])
+  }, [userId, fetchNotifications])
 
   const markAsRead = async (notifId: string) => {
     const { error } = await supabase

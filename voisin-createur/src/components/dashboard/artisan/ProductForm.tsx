@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { ProductFormData, Product, PRODUCT_CATEGORIES } from '@/lib/types'
+import Image from 'next/image'
+import { ProductFormData, PRODUCT_CATEGORIES } from '@/lib/types'
 
 interface ProductFormProps {
   onSubmit: (data: ProductFormData) => Promise<void>
@@ -52,7 +53,7 @@ export default function ProductForm({ onSubmit, onCancel, initialData, loading }
             className="aspect-square w-full border-2 border-dashed border-border rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-surface transition-colors overflow-hidden bg-background relative"
           >
             {imagePreview ? (
-              <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+              <Image src={imagePreview} alt="Preview" fill className="object-cover" />
             ) : (
               <div className="text-center p-4">
                 <span className="text-4xl block mb-2">📸</span>
@@ -117,7 +118,7 @@ export default function ProductForm({ onSubmit, onCancel, initialData, loading }
               value={formData.short_description}
               onChange={(e) => setFormData({ ...formData, short_description: e.target.value })}
               className="w-full px-4 py-2 rounded-xl border border-border bg-background focus:ring-2 focus:ring-teal outline-none transition-all"
-              placeholder="Une phrase d'accroche pour le flux"
+              placeholder="Une phrase d&apos;accroche pour le flux"
             />
           </div>
         </div>
@@ -132,7 +133,7 @@ export default function ProductForm({ onSubmit, onCancel, initialData, loading }
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="w-full px-4 py-2 rounded-xl border border-border bg-background focus:ring-2 focus:ring-teal outline-none transition-all"
-            placeholder="Détails sur la fabrication, l'origine des produits..."
+            placeholder="Détails sur la fabrication, l&apos;origine des produits..."
           />
         </div>
 

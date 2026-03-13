@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Order } from '@/lib/types'
 
@@ -9,7 +9,7 @@ export function useOrders(userId: string | undefined, profileType: 'artisan' | '
   const [loadingOrders, setLoadingOrders] = useState(false)
 
   // Récupérer les commandes
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     if (!userId) return
 
     try {
@@ -34,11 +34,11 @@ export function useOrders(userId: string | undefined, profileType: 'artisan' | '
     } finally {
       setLoadingOrders(false)
     }
-  }
+  }, [userId, profileType])
 
   useEffect(() => {
     fetchOrders()
-  }, [userId, profileType])
+  }, [fetchOrders])
 
   // Créer une nouvelle commande
   const createOrder = async (productId: string, sellerId: string, quantity: number, totalPrice: number, defaultPrepTime: number) => {
@@ -74,16 +74,17 @@ export function useOrders(userId: string | undefined, profileType: 'artisan' | '
       }])
 
       return { success: true, data }
-    } catch (err: any) {
-      console.error("Erreur commande:", err)
-      return { success: false, error: err.message }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Erreur inconnue')
+      console.error("Erreur commande:", error)
+      return { success: false, error: error.message }
     }
   }
 
   // Mettre à jour le statut d'une commande
   const updateOrderStatus = async (orderId: string, status: Order['status'], estimatedReadyDays?: number) => {
     try {
-      const updates: any = { status, updated_at: new Date().toISOString() }
+      const updates: Record<string, unknown> = { status, updated_at: new Date().toISOString() }
       
       // Si on confirme, on peut ajuster la date
       if (status === 'confirmed' && estimatedReadyDays !== undefined) {
@@ -125,9 +126,10 @@ export function useOrders(userId: string | undefined, profileType: 'artisan' | '
       setOrders(orders.map(o => o.id === orderId ? { ...o, ...updates } : o))
       
       return { success: true }
-    } catch (err: any) {
-      console.error("Erreur mise à jour commande:", err)
-      return { success: false, error: err.message }
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error('Erreur inconnue')
+      console.error("Erreur mise à jour commande:", error)
+      return { success: false, error: error.message }
     }
   }
 

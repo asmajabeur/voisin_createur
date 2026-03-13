@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNotifications, Notification } from '@/hooks/useNotifications'
 import { UserProfile } from '@/lib/types'
@@ -35,7 +36,7 @@ export default function Header({ user, signOut }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3">
           <Link href="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+            <Image src="/logo.png" alt="Logo" width={64} height={64} className="h-16 w-auto" />
             <span className="font-cursive text-2xl text-teal font-bold hidden sm:block">Voisin Créateur</span>
           </Link>
           

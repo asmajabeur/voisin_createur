@@ -26,14 +26,11 @@ interface ProfileSwitcherProps {
 }
 
 export default function ProfileSwitcher({ currentProfile, onProfileChange }: ProfileSwitcherProps) {
-  const [profiles, setProfiles] = useState<UserProfile[]>([])
   const [loading, setLoading] = useState(false)
 
   // Synchronisation avec le profil courant
   useEffect(() => {
-    if (currentProfile) {
-      setProfiles([currentProfile])
-    }
+    // Plus besoin de synchroniser les profils locaux si on utilise seulement currentProfile
   }, [currentProfile])
 
   /**
@@ -82,7 +79,6 @@ export default function ProfileSwitcher({ currentProfile, onProfileChange }: Pro
             postal_code: newProfile.postal_code,
           } as UserProfile
 
-          setProfiles(prev => [...prev.filter(p => p.profile_type !== newProfileType), mappedProfile])
           onProfileChange(mappedProfile)
         }
       }

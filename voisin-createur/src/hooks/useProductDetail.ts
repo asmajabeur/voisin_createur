@@ -33,9 +33,10 @@ export function useProductDetail(productId: string) {
         }
         
         setProduct(formattedProduct)
-      } catch (err: any) {
-        console.error("Erreur fetch produit:", err)
-        setError(err.message)
+      } catch (err: unknown) {
+        const error = err instanceof Error ? err : new Error('Erreur inconnue')
+        console.error("Erreur fetch produit:", error)
+        setError(error.message)
       } finally {
         setLoading(false)
       }

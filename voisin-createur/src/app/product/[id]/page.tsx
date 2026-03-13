@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { ArrowLeftIcon, HeartIcon, ShareIcon, ShieldCheckIcon, TruckIcon, ClockIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { useProductDetail } from '@/hooks/useProductDetail'
 import { useOrders } from '@/hooks/useOrders'
 import { useAuth } from '@/hooks/useAuth'
@@ -30,7 +30,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
         <h1 className="text-2xl font-bold text-text mb-4">Oups ! Produit introuvable.</h1>
-        <Link href="/" className="text-teal font-bold hover:underline">Retour à l'accueil</Link>
+        <Link href="/" className="text-teal font-bold hover:underline">Retour à l&apos;accueil</Link>
       </div>
     )
   }
@@ -145,15 +145,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-surface shadow-sm relative">
                     <Image 
-                      src={(product as any).artisan?.avatar_url || "https://images.unsplash.com/photo-1580983574971-ce488d5e08f5?w=150"} 
-                      alt={(product as any).artisan?.name} 
+                      src={product.artisan?.avatar_url || "https://images.unsplash.com/photo-1580983574971-ce488d5e08f5?w=150"} 
+                      alt={product.artisan?.name || 'Artisan'} 
                       fill
                       className="object-cover"
                     />
                   </div>
                   <div>
-                    <p className="font-bold text-text">{(product as any).artisan?.name || 'Voisin Créateur'}</p>
-                    <p className="text-xs text-teal">{(product as any).artisan?.city || 'Local'}</p>
+                    <p className="font-bold text-text">{product.artisan?.name || 'Voisin Créateur'}</p>
+                    <p className="text-xs text-teal">{product.artisan?.city || 'Local'}</p>
                   </div>
                 </div>
               </div>

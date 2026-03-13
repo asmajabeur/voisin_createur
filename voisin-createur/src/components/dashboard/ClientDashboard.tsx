@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import { UserProfile } from '@/lib/types'
 import HeroSection from '../home/HeroSection'
-import FeaturesSection from '../home/FeaturesSection'
-import CreatorsSection from '../home/CreatorsSection'
 import ProductGrid from '../products/ProductGrid'
 import FeedFilters from '../feed/FeedFilters'
 import ProductFeed from '../feed/ProductFeed'

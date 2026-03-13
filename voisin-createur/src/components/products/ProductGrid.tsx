@@ -20,7 +20,7 @@ export default function ProductGrid({ posts, loading }: ProductGridProps) {
     return (
       <div className="text-center py-20  rounded-xl border border-gray-100 shadow-sm">
         <p className="text-gray-500 mb-2">Aucune création trouvée dans ce rayon.</p>
-        <p className="text-sm text-gray-400">Essayez d'autres mots-clés ou modifiez vos filtres de prix.</p>
+        <p className="text-sm text-gray-400">Essayez d&apos;autres mots-clés ou modifiez vos filtres de prix.</p>
       </div>
     )
   }

@@ -1,10 +1,11 @@
 import { Product } from '@/lib/types'
+import Image from 'next/image'
 
 interface CatalogSectionProps {
   products: Product[]
   loadingProducts: boolean
   onToggleProductActive: (product: Product) => void
-  onEditProduct: (product: Product) => void
+  onEditProduct: (product: Product | null) => void
   onDeleteProduct: (productId: string) => Promise<{ success: boolean; error?: string }>
 }
 
@@ -19,7 +20,7 @@ export default function CatalogSection({
     <div className="mb-16">
       <div className="flex items-center justify-center gap-4 mb-8">
         <div className="h-px bg-border flex-1 max-w-xs"></div>
-        <h2 className="text-4xl text-text font-bold font-heading px-4">Mon Catalogue d'Articles</h2>
+        <h2 className="text-4xl text-text font-bold font-heading px-4">Mon Catalogue d&apos;Articles</h2>
         <div className="h-px bg-border flex-1 max-w-xs"></div>
       </div>
 
@@ -28,9 +29,9 @@ export default function CatalogSection({
           <div className="col-span-full text-center py-12 text-text-muted font-medium">Chargement de votre catalogue...</div>
         ) : products.length === 0 ? (
           <div className="col-span-full text-center py-12 text-text-muted font-medium border-2 border-dashed border-border/50 rounded-xl">
-            Vous n'avez pas encore d'articles dans votre catalogue.<br />
+            Vous n&apos;avez pas encore d&apos;articles dans votre catalogue.<br />
             <button 
-              onClick={() => onEditProduct(null as any)}
+              onClick={() => onEditProduct(null)}
               className="mt-4 bg-teal text-white py-2 px-6 rounded-lg text-sm font-semibold shadow-sm transition-colors hover:bg-teal-dark"
             >
               Ajouter un produit
@@ -44,10 +45,11 @@ export default function CatalogSection({
 
               {/* Image Produit - Proportions naturelles, pas carrée */}
               <div className="relative h-56 bg-gray-200 overflow-hidden">
-                <img
+                <Image
                   src={product.image_url || 'https://images.unsplash.com/photo-1610708083812-3211116b08ed?q=80&w=600&auto=format&fit=crop'}
                   alt={product.name}
-                  className={`w-full h-full object-cover transition-all duration-300 ${!isActive ? 'grayscale opacity-70' : ''}`}
+                  fill
+                  className={`object-cover transition-all duration-300 ${!isActive ? 'grayscale opacity-70' : ''}`}
                 />
               </div>
 
@@ -61,7 +63,7 @@ export default function CatalogSection({
               <div className="bg-teal-dark p-4 flex-1 border-b border-border/20 space-y-3">
                 {product.short_description && (
                   <p className="text-[14px] text-white/90 italic line-clamp-2">
-                    "{product.short_description}"
+                    &quot;{product.short_description}&quot;
                   </p>
                 )}
                 
