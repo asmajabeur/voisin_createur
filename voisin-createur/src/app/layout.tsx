@@ -15,8 +15,15 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Voisin Créateur",
-  description: "Découvrez et achetez les créations uniques des artisans de votre quartier",
+  title: "Voisin Créateur | Soutenez vos artisans locaux",
+  description: "Découvrez et achetez les créations uniques des artisans de votre quartier, en click & collect ou livraison.",
+  openGraph: {
+    title: "Voisin Créateur",
+    description: "Le talent de votre voisin, directement chez vous.",
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Voisin Créateur",
+  }
 };
 
 export default function RootLayout({

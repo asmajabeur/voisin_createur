@@ -4,7 +4,7 @@
 **App:** Voisin Créateur
 **Goal:** Permettre aux artisans talentueux qui travaillent à domicile de vendre facilement leurs créations uniques (pâtisseries, mode, accessoires) directement aux habitants de leur quartier
 **Stack:** Next.js + Supabase + Tailwind CSS + Vercel
-**Current Phase:** Phase 1 - Foundation
+**Current Phase:** Phase 5 - Beta Testing & Polish Final
 
 ## 🧠 How I Should Think
 1. **Understand Intent First**: Before answering, identify what the user actually needs
@@ -46,11 +46,10 @@ Refer to these for details (load only when needed):
 - `agent_docs/product_requirements.md`: Full PRD
 - `agent_docs/testing.md`: Verification strategy and commands
 
-## 🔄 Current State (Update This!)
-**Last Updated:** Aujourd'hui (Juste maintenant)
-**Working On:** Phase 3 Polish & Launch (Préparation)
-**Recently Completed:** Système de commande simple, Notifications temps réel, Peaufinage UI (Typographie Inter & Notifs), Navigation.
-**Blocked By:** Aucun.
+**Last Updated:** Aujourd'hui (À l'instant)
+**Working On:** Phase 5 - Beta Testing & Polish Final
+**Recently Completed:** Phase 4 - Expérience Artisan (Profil & Vitrine)
+**Blocked By:** Validation du plan par l'utilisateur (Corrections finales).
 
 ## 🚀 Roadmap
 ### Phase 1: Foundation
@@ -67,10 +66,19 @@ Refer to these for details (load only when needed):
 - [x] Système de commande simple
 
 ### Phase 3: Polish & Launch
-- [ ] Mobile responsiveness testing
-- [ ] Performance optimization
-- [ ] Deploy to Vercel
+- [x] Mobile responsiveness testing
+- [x] Performance optimization (Images & Code cleanup)
+- [x] Deploy to Vercel (SUCCESS 🎉)
+
+### Phase 4: Expérience Artisan (Profil & Vitrine)
+- [x] Édition avancée du profil (Bannière, Réseaux sociaux, Bio complète, Logistique)
+- [x] Création de la page vitrine publique `/artisan/[id]`
+- [x] Lien de partage depuis le Dashboard Artisan
+- [x] Mise à jour du schéma Supabase (table `profiles`)
+
+### Phase 5: Beta Testing & Polish Final
 - [ ] Beta testing with real users
+- [ ] Corrections post-lancement
 
 ## ⚠️ What NOT To Do
 - Do NOT delete files without explicit confirmation
