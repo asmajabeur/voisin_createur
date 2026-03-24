@@ -10,11 +10,22 @@ export interface UserProfile {
   postal_code?: string
   city?: string
   phone?: string
+  address?: string
   description?: string
   avatar_url?: string
+  banner_url?: string
+  is_motorized?: boolean
+  can_deliver?: boolean
   created_at: string
   updated_at: string
   short_description?: string
+  long_description?: string
+  social_links?: {
+    instagram?: string
+    facebook?: string
+    tiktok?: string
+    website?: string
+  }
 }
 
 export interface ProductFormData {

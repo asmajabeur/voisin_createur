@@ -8,6 +8,7 @@ import CatalogSection from './artisan/CatalogSection'
 import OrdersList from './artisan/OrdersList'
 import ChatInterface from './artisan/ChatInterface'
 import ProductForm from './artisan/ProductForm'
+import ProfileEditForm from './artisan/ProfileEditForm'
 import { UserProfile, Product, ProductFormData } from '@/lib/types'
 
 interface ArtisanDashboardProps {
@@ -17,6 +18,7 @@ interface ArtisanDashboardProps {
 export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
   const { products, loadingProducts, toggleProductActive, addProduct, updateProduct, deleteProduct } = useProducts(user?.id)
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [isProfileFormOpen, setIsProfileFormOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
 
   const handleOpenForm = (product: Product | null = null) => {
@@ -76,8 +78,18 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
               </p>
               {/* Nouveaux boutons d'action rapides */}
               <div className="flex flex-wrap gap-3 justify-center md:justify-start mt-4">
-                <button className="bg-surface border border-border text-text-muted hover:bg-background px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors">
+                <button 
+                  onClick={() => setIsProfileFormOpen(true)}
+                  className="bg-surface border border-border text-text-muted hover:bg-background px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors"
+                >
                   ✏️ Modifier mon profil
+                </button>
+                <button 
+                  onClick={() => window.open(`/artisan/${user.id}`, '_blank')}
+                  className="bg-surface border border-accent/30 text-accent hover:bg-accent hover:text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition-colors"
+                  title="Ouvrir dans un nouvel onglet"
+                >
+                  👀 Voir ma vitrine
                 </button>
                 <button 
                   onClick={() => handleOpenForm()} 
@@ -151,6 +163,30 @@ export default function ArtisanDashboard({ user }: ArtisanDashboardProps) {
                 onCancel={() => setIsFormOpen(false)}
                 initialData={editingProduct || undefined}
                 loading={loadingProducts}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* --- MODAL ÉDITION PROFIL --- */}
+        {isProfileFormOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+            <div className="bg-background w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 md:p-10 border border-border relative">
+              <div className="flex justify-between items-center mb-8 sticky top-0 bg-background/95 backdrop-blur-sm py-4 z-10 border-b border-border">
+                <h2 className="text-3xl font-heading font-bold text-text">
+                  Ma Vitrine
+                </h2>
+                <button 
+                  onClick={() => setIsProfileFormOpen(false)}
+                  className="p-2 hover:bg-surface rounded-full transition-colors font-bold"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <ProfileEditForm 
+                onCancel={() => setIsProfileFormOpen(false)}
+                onSuccess={() => setIsProfileFormOpen(false)}
               />
             </div>
           </div>

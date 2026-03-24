@@ -5,11 +5,12 @@ import React from 'react'
 import { supabase } from '@/lib/supabase'
 import { UserProfile, ProfileType } from '@/lib/types'
 
-interface AuthContextType {
+export interface AuthContextType {
   user: UserProfile | null
   loading: boolean
   signOut: () => Promise<void>
   refreshProfile: () => Promise<void>
+  updateProfile: (updates: Partial<UserProfile>) => Promise<{ success: boolean; error?: string }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -36,11 +37,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           postal_code: data.postal_code,
           city: data.city,
           phone: data.phone,
+          address: data.address,
           description: data.description,
           avatar_url: data.avatar_url,
+          banner_url: data.banner_url,
+          is_motorized: data.is_motorized,
+          can_deliver: data.can_deliver,
           created_at: data.created_at,
           updated_at: data.updated_at,
           short_description: data.short_description,
+          long_description: data.long_description,
+          social_links: data.social_links,
         }
         setUser(profile)
       }
@@ -94,11 +101,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const updateProfile = async (updates: Partial<UserProfile>): Promise<{ success: boolean; error?: string }> => {
+    if (!user) return { success: false, error: 'Non authentifié' }
+    
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          ...updates,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', user.id)
+
+      if (error) throw error
+
+      // Rafraîchir pour avoir les données locales à jour
+      await refreshProfile()
+      
+      return { success: true }
+    } catch (error: any) {
+      console.error('Erreur lors de la mise à jour du profil:', error)
+      return { success: false, error: error.message || 'Erreur lors de la mise à jour' }
+    }
+  }
+
   const contextValue = {
     user,
     loading,
     signOut,
-    refreshProfile
+    refreshProfile,
+    updateProfile
   }
 
   return React.createElement(
