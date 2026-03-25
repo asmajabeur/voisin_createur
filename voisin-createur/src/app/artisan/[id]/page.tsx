@@ -8,9 +8,9 @@ import { FeedProduct } from '@/hooks/useFeed'
 export const revalidate = 60 
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function ArtisanPage({ params }: PageProps) {
