@@ -34,7 +34,7 @@ export default async function ArtisanPage({ params }: PageProps) {
   }
 
   // 2. Récupération des produits de l'artisan
-  const { data: productsData, error: productsError } = await supabase
+  const { data: productsData } = await supabase
     .from('products')
     .select(`
       *,

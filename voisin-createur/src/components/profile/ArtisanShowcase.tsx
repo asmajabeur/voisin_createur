@@ -146,7 +146,7 @@ export default function ArtisanShowcase({ artisan, products, loading }: ArtisanS
           <div className="bg-surface/50 rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-border">
             {products.length === 0 && !loading ? (
               <div className="text-center py-12">
-                <p className="text-text-muted text-lg">Cet artisan n'a pas encore de créations en ligne.</p>
+                <p className="text-text-muted text-lg">Cet artisan n&apos;a pas encore de créations en ligne.</p>
               </div>
             ) : (
               <ProductGrid posts={products} loading={loading} />

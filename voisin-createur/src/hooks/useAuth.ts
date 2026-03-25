@@ -119,9 +119,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await refreshProfile()
       
       return { success: true }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Erreur lors de la mise à jour du profil:', error)
-      return { success: false, error: error.message || 'Erreur lors de la mise à jour' }
+      return { success: false, error: (error instanceof Error ? error.message : String(error)) || 'Erreur lors de la mise à jour' }
     }
   }
 

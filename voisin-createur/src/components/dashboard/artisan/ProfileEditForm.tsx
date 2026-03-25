@@ -136,9 +136,9 @@ export default function ProfileEditForm({ onCancel, onSuccess }: ProfileEditForm
       } else {
         throw new Error(result.error || "Erreur inconnue lors de la sauvegarde.")
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || 'Une erreur est survenue lors de la mise à jour.')
+      setError((err instanceof Error ? err.message : String(err)) || 'Une erreur est survenue lors de la mise à jour.')
     } finally {
       setLoading(false)
     }
@@ -210,7 +210,7 @@ export default function ProfileEditForm({ onCancel, onSuccess }: ProfileEditForm
               />
             </div>
             <div className="text-sm text-text-muted">
-              C'est le visage de votre entreprise. Utilisez une photo de vous en pleine création ou le logo de votre marque !
+              C&apos;est le visage de votre entreprise. Utilisez une photo de vous en pleine création ou le logo de votre marque !
             </div>
           </div>
         </div>
@@ -223,7 +223,7 @@ export default function ProfileEditForm({ onCancel, onSuccess }: ProfileEditForm
         <h3 className="font-heading font-bold text-xl text-text">Informations Générales</h3>
         
         <div>
-          <label className="block text-sm font-semibold text-text mb-1">Nom de l'atelier / Marque *</label>
+          <label className="block text-sm font-semibold text-text mb-1">Nom de l&apos;atelier / Marque *</label>
           <input
             type="text"
             name="name"
